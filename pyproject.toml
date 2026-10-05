@@ -1,0 +1,15 @@
+[tool.pylint.miscellaneous]
+notes = ["FIXME", "XXX", "TODO"]
+[tool.pylint."messages control"]
+confidence = [
+    "HIGH",
+    "CONTROL_FLOW",
+    "INFERENCE",
+    "INFERENCE_FAILURE",
+    "UNDEFINED",
+]
+disable = [
+    "import-error",
+    "missing-module-docstring",
+    "pointless-string-statement",
+]
