@@ -9,7 +9,8 @@ class Interface:
         flags = None,
         ipv4_address=None,
         netmask=None,
-        mac_address=None
+        mac_address=None,
+        if_type="switchport"
     ):
         self.name = name
 
@@ -92,7 +93,6 @@ class Machine:
         ]
         self.arp_table = ArpTable()
 
-
     def update_interface(self, name, flags=None, ipv4_address=None, netmask=None, action="append"):
         """
         méthode qui permet de mettre à jour une interface de la machine 
@@ -117,9 +117,44 @@ class Machine:
                 if netmask is not None:
                     i.update(key="netmask",val=netmask)
                 
-
     def add_interface(self, interface):
         """
         méthode d'ajout d'une interface à la machine
         """
         self.interfaces.append(interface)
+
+
+class Vlan:
+    """
+    Modèle de Virtual Local Area Network 
+    """
+    def __init__(self,name,id):
+        self.name = name
+        self.id = id
+
+class Switch(Machine):
+    """Modèle représentant le Switch"""
+    def __init__(self,
+        hostname,
+        fasthernet_interfaces_count: int,
+        gigabit_ethernet_interfaces_count: int,
+        nvram:str,
+        if_type:str = "switchport"
+    ):
+
+        """
+        Quand une classe hérite d'une autre en l'occurrence la classe Switch hérite de Machine 
+        On doit mettre l'instruction d'appel au constructeur de la classe parent ( ici: Machine ) en PREMIER
+        """
+        super().__init__(hostname=hostname)
+
+        self.nvram = nvram
+        self.hostname = hostname
+        self.fasthernet_interfaces_count = fasthernet_interfaces_count
+        self.gigabit_ethernet_interfaces_count = gigabit_ethernet_interfaces_count
+
+        for i in range(self.fasthernet_interfaces_count):
+            self.interfaces.append(Interface(name=f"FastEthernet0/{i + 1}",flags=["DOWN"], if_type=if_type))
+
+
+sw = Switch(hostname="samia-switch", fasthernet_interfaces_count=24, gigabit_ethernet_interfaces_count=2, nvram=None)
