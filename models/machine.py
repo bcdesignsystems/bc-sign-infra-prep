@@ -34,7 +34,7 @@ class Interface:
         self.netmask = netmask
         self.mac_address = mac_address
 
-    def update(self, key, val,action="append"):
+    def update(self, key, val, action="append"):
         """
         méthode afin de mettre à jour une information de l'interface 
         cela peut être la liste des flags , l'adresse IP ou le masque de sous-réseau
@@ -75,7 +75,7 @@ class Machine:
     """
     Ceci est un modèle en Python représentant une machine
     """
-    def __init__(self,hostname):
+    def __init__(self, hostname):
         self.hostname = hostname
         self.interfaces = [
             Interface(
@@ -86,7 +86,7 @@ class Machine:
             ),
             Interface(
                 name="en0",
-                flags=["UP","BROADCAST","SMART","RUNNING","SIMPLEX","MULTICAST"],
+                flags=["UP", "BROADCAST", "SMART", "RUNNING", "SIMPLEX", "MULTICAST"],
                 ipv4_address="192.168.1.80",
                 netmask="255.255.255.0"
             )
@@ -111,12 +111,12 @@ class Machine:
                 """
                 if flags is not None:
                     for f in flags:
-                        i.update(key="flags", val=f,action=action)
+                        i.update(key="flags", val=f, action=action)
                 if ipv4_address is not None:
                     i.update(key="ipv4_address", val=ipv4_address)
                 if netmask is not None:
-                    i.update(key="netmask",val=netmask)
-                
+                    i.update(key="netmask", val=netmask)
+
     def add_interface(self, interface):
         """
         méthode d'ajout d'une interface à la machine
@@ -128,7 +128,7 @@ class Vlan:
     """
     Modèle de Virtual Local Area Network 
     """
-    def __init__(self,name,id):
+    def __init__(self, name, id):
         self.name = name
         self.id = id
 
@@ -138,13 +138,13 @@ class Switch(Machine):
         hostname,
         fasthernet_interfaces_count: int,
         gigabit_ethernet_interfaces_count: int,
-        nvram:str,
-        if_type:str = "switchport"
+        nvram: str,
+        if_type: str = "switchport"
     ):
 
         """
         Quand une classe hérite d'une autre en l'occurrence la classe Switch hérite de Machine 
-        On mets l'instruction d'appel au constructeur de la classe parent ( ici: Machine ) en PREMIER
+        On doit mettre l'instruction d'appel au constructeur de la classe parent ( ici: Machine ) en PREMIER
         """
         super().__init__(hostname=hostname)
 
@@ -154,42 +154,41 @@ class Switch(Machine):
         self.gigabit_ethernet_interfaces_count = gigabit_ethernet_interfaces_count
 
         for i in range(self.fasthernet_interfaces_count):
-            self.interfaces.append(Interface(name=f"FastEthernet0/{i + 1}",flags=["DOWN"], if_type=if_type))
+            self.interfaces.append(Interface(name=f"FastEthernet0/{i + 1}", flags=["DOWN"], if_type=if_type))
+
 
 class Routeur(Machine):
     """
     Modèle représentant le routeur
     """
     def __init__(
-        self, 
+        self,
         hostname,
         gigabit_ethernet_interfaces_count: int,
-        nvram:str
+        nvram: str
     ):
+        super().__init__(hostname=hostname)
 
-         super().__init__(hostname=hostname)
+        self.nvram = nvram
+        self.gigabit_ethernet_interfaces_count = gigabit_ethernet_interfaces_count
 
-         self.nvram = nvram
-         self.gigabit_ethernet_interfaces_count = gigabit_ethernet_interfaces_count
-
-         """
-         mise en place automatique des interfaces physiques (ex: GigabitEthernet0/0/0, 0/0/1...)
-         """
-
-         for i in range(self.gigabit_ethernet_interfaces_count):
+        """
+        mise en place automatique des interfaces physiques (ex: GigabitEthernet0/0/0, 0/0/1...)
+        """
+        for i in range(self.gigabit_ethernet_interfaces_count):
             self.interfaces.append(Interface(name=f"GigabitEthernet0/0/{i}", flags=["DOWN"]))
 
     def route_packet(self, destination_ip):
-     """
-     Simule le routage d'un paquet vers une IP de destination
-     """
-    for interface in self.interfaces:
+        """
+        Simule le routage d'un paquet vers une IP de destination
+        """
+        for interface in self.interfaces:
             if interface.ipv4_address is not None:
                 print(f"Paquet vers {destination_ip} routé via {interface.name}")
                 return interface
 
-    print("Aucune route disponible")
-    return None
+        print("Aucune route disponible")
+        return None
 
 
 sw = Switch(hostname="samia-switch", fasthernet_interfaces_count=24, gigabit_ethernet_interfaces_count=2, nvram=None)
