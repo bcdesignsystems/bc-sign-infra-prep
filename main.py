@@ -1,13 +1,3 @@
-from models.appliances.switch import Switch
+from utils.ip import get_dec_from_bin
 
-
-"""
-Scénario:
-- Création d'un switch
-"""
-sw1 = Switch(
-    hostname="samia-switch",
-    fasthernet_interfaces_count=24,
-    gigabit_ethernet_interfaces_count=2,
-    nvram=None
-)
+print(get_dec_from_bin("11110000"))
