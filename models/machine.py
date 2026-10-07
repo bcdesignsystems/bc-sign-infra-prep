@@ -157,7 +157,7 @@ class Switch(Machine):
             self.interfaces.append(Interface(name=f"FastEthernet0/{i + 1}", flags=["DOWN"], if_type=if_type))
 
 
-class Routeur(Machine):
+class Router(Machine):
     """
     Modèle représentant le routeur
     """
@@ -189,6 +189,3 @@ class Routeur(Machine):
 
         print("Aucune route disponible")
         return None
-
-
-sw = Switch(hostname="samia-switch", fasthernet_interfaces_count=24, gigabit_ethernet_interfaces_count=2, nvram=None)
