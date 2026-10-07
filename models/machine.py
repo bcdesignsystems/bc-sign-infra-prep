@@ -2,11 +2,14 @@
 from .interface import Interface
 from .arp.arp_table import ArpTable
 
+
+
 class Machine:
     """
     Ceci est un modèle en Python représentant une machine
     """
-    def __init__(self,hostname):
+    
+    def __init__(self, hostname):
         self.hostname = hostname
         self.interfaces = [
             Interface(
@@ -17,7 +20,7 @@ class Machine:
             ),
             Interface(
                 name="en0",
-                flags=["UP","BROADCAST","SMART","RUNNING","SIMPLEX","MULTICAST"],
+                flags=["UP", "BROADCAST", "SMART", "RUNNING", "SIMPLEX", "MULTICAST"],
                 ipv4_address="192.168.1.80",
                 netmask="255.255.255.0"
             )
@@ -42,15 +45,16 @@ class Machine:
                 """
                 if flags is not None:
                     for f in flags:
-                        i.update(key="flags", val=f,action=action)
+                        i.update(key="flags", val=f, action=action)
                 if ipv4_address is not None:
                     i.update(key="ipv4_address", val=ipv4_address)
                 if netmask is not None:
-                    i.update(key="netmask",val=netmask)
-                
+                    i.update(key="netmask", val=netmask)
+
     def add_interface(self, interface):
         """
         méthode d'ajout d'une interface à la machine
         """
         self.interfaces.append(interface)
+
 
