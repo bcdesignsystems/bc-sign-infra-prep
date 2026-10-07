@@ -182,10 +182,19 @@ class Router(Machine):
         """
         Simule le routage d'un paquet vers une IP de destination
         """
+         # On parcourt toutes les interfaces du routeur, une par une
         for interface in self.interfaces:
+
+             # On vérifie si cette interface a une adresse IP configurée (différente de None)
             if interface.ipv4_address is not None:
-                print(f"Paquet vers {destination_ip} routé via {interface.name}")
+
+                 # Si oui, on affiche un message disant par quelle interface le paquet "sort"
+                print(f"Packet to {destination_ip} routed via {interface.name}")
+
+                 # On arrête la méthode ici et on renvoie l'interface trouvée
                 return interface
 
-        print("Aucune route disponible")
+
+        # Si on arrive ici, c'est qu'aucune interface n'avait d'IP configurée
+        print("No route available")
         return None
