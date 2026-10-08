@@ -1,18 +1,20 @@
-# nous voulons 14 addresses ipv4 dispos = 16 adresses dispo
-# 16 adresses dispo = 14 + 1 adresse broadcast + 1 adresse rzo
+"""ip.py"""
 
 def get_hosts_from_cidr(cidr):
     """
-    en fonction du cird on peut savoir
-    le nombre d'hôtes dispos sur le réseau
+    En fonction du CIRD on peut savoir 
+    le nombre d'hôtes disponibles sur le réseau
     """
     return 2**(32-int(cidr)) - 2
 
 def get_dec_from_bin(binary:str):
-    #1 1 1 1 0 0 0 0
     """
-    fonction qui permet de trouver la notation déciale d'un octet en binaire
+    fonction qui permet de trouve la notation décimale 
+    d'une octet en binaire
     """
+    #puissance|  7  | 6  | 5  | 4  | 3 | 2 | 1 | 0 |
+    #valeurs  |  1  | 1  | 1  | 1  | 0 | 0 | 0 | 0 |
+    #decimales| 128 | 64 | 32 | 16 | 0 | 0 | 0 | 0 |
     result = 0
     for k,i in enumerate(binary):
         result += int(i) * 2**(7-k)
