@@ -1,0 +1,8 @@
+enable
+configure terminal
+ip access-list extended DENY-MARKETING-RH-FTP
+deny icmp 192.168.20.0 0.0.0.15 host 192.168.21.3
+permit ip any any
+exit
+end
+write memory
