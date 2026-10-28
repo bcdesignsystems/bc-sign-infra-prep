@@ -20,9 +20,9 @@ class MySocket:
         data = self.sock.recv(195).decode("utf-8")
         print(data)
         encoded_str = (re.findall(pattern=r"[a-zA-Z0-9=]+", string=data))[-5]
-        print(f"-------------{encoded_str}-------------------")
-        binary, _ = base64_codec.base64_decode(f"{encoded_str}\n".encode())
-        self.sock.sendall(binary)
+        binary, _ = base64_codec.base64_decode(encoded_str.encode())
+        print("binary", binary)
+        self.sock.sendall((binary.decode() + "\n").encode())
         response = self.sock.recv(195)
         print(response.decode())
         self.sock.close()
