@@ -1,0 +1,4 @@
+# wifi laptop card : throw default card
+# and replace it by WPC300N
+# dhcp mode
+# ssid : WIFI

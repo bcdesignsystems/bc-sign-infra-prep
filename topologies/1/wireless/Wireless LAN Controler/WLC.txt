@@ -1,0 +1,8 @@
+# VLAN - SSID = wifi
+# WPA2-PSK
+# Encryption = Access
+# Central Control = Central
+# WLC mode DHCP
+
+# @ ip 192.168.50.4 /28 - gat = 192.168.50.6
+# dns = 192.168.30.2
