@@ -1,0 +1,9 @@
+# les pcs sont dans le vlan 10
+# mode Firewall activé sur PC0 avec 3 règles
+# switchport protected sur port PC2 + PC3
+
+# PC0 : FIREWALL
+# - allow icmp 192.168.10.1
+# - allow tcp 192.168.10.10 0.0.0.0  53 any
+# - allow udp 192.168.10.10 0.0.0.0  53 any
+# - allow tcp 192.168.10.10 0.0.0.0  80 any

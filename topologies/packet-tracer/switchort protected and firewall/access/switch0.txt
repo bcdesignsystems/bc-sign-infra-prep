@@ -1,0 +1,31 @@
+enable
+conf t
+hostname SW-ISO
+vlan 10
+ name ISO
+interface range fa0/1-4
+ switchport mode access
+ switchport access vlan 10
+end
+
+conf t
+interface range fa0/1-2
+ switchport protected
+end
+write memory
+
+configure terminal
+interface terminal
+ip address 192.168.10.5 255.255.255.240
+no shutdown
+end
+write memory
+
+configure terminal
+interface gigabitEthernet 0/1
+switchport mode access
+switchport access vlan 10
+no shutdown
+end
+write memory
+
