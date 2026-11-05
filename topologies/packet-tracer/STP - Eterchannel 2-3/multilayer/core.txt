@@ -1,0 +1,27 @@
+enable
+configure terminal
+interface range g1/0/1, g1/0/3
+ switchport mode trunk
+ channel-group 1 mode active
+ exit
+interface range g1/0/2, g1/0/4
+ switchport mode trunk
+ channel-group 2 mode active
+ end
+ write memory
+
+configure terminal
+spanning-tree mode rapid-pvst
+spanning-tree vlan 1 root primary
+end
+write memory
+
+# PERTE D'UN PORT CHANNEL ENTIER
+
+configure terminal
+interface port-channel 2
+ shutdown
+
+# et ensuite 
+
+no shutdown

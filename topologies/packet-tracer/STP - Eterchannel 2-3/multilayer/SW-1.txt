@@ -1,0 +1,36 @@
+enable
+configure terminal
+hostname SW-1
+exit
+ip routing
+exit
+interface port-channel 1
+ no switchport
+ ip address 10.0.0.1 255.255.255.252
+ exit
+interface range g1/0/1-2
+ no switchport
+ channel-group 1 mode active
+ end
+ write memory
+
+# ajout du routage statique
+
+configure terminal
+interface g1/0/3
+ no switchport
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+ip route 192.168.20.0 255.255.255.0 10.0.0.2
+end
+write memory
+
+# COUPURE D'UN CÂBLE
+
+configure terminal
+interface g1/0/1
+ shutdown
+
+# ensuite
+
+no shutdown
