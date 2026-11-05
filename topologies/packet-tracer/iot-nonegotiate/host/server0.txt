@@ -1,0 +1,2 @@
+# 192.168.10.1	IP fixe, passerelle 192.168.10.5
+# dns = gestion.iot	A Record	192.168.10.1

@@ -1,0 +1,3 @@
+# IP fixe, passerelle 192.168.11.5, DNS 192.168.10.1
+" @ ip = 192.168.11.1
+# sur le VLAN 11

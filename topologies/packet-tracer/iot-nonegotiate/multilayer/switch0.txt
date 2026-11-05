@@ -1,0 +1,2 @@
+# par défaut, un port cisco peut négocier trunk
+# la cde nonegotiate désactive cela

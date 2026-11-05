@@ -1,0 +1,45 @@
+enable
+configure terminal
+interface gigabitEthernet 1/0/1
+ switchport mode access
+ switchport access vlan 11
+ no shutdown
+ exit
+ 
+interface gigabitEthernet 1/0/2
+ switchport mode access
+ switchport access vlan 10
+ no shutdown
+ exit
+
+interface gigabitEthernet 1/0/3
+ switchport mode access
+ switchport access vlan 10
+ switchport nonegotiate
+ no shutdown
+ end
+ write memory
+
+enable
+configure terminal
+ip routing
+exit
+
+interface vlan 10
+ ip address 192.168.10.5 255.255.255.240
+ no shutdown
+exit
+
+interface vlan 11
+ ip address 192.168.11.5 255.255.255.240
+ no shutdown
+ end 
+ write memory
+
+enable
+configure terminal
+interface gigabitEthernet 1/0/4
+ switchport mode access
+ switchport nonegotiate
+ end 
+ write memory

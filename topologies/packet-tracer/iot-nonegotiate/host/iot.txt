@@ -1,0 +1,4 @@
+# @ ip des équipements iot distribuées par dhcp
+# + ces équipements en wifi via Access Point
+# @ ip = 192.168.10.8 à .12 (pool dhcp)
+# sur le VLAN 10
